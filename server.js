@@ -10,17 +10,21 @@ app.use(express.json());
 
 app.use('/:songid', express.static(path.join(__dirname, './')));
 
-// GET SONG
+// GET SONG VIA SERVICE SERVER
 app.get('/songs/:songId/:userId', (req, res) => {
   const { songId, userId } = req.params;
+  const options = {
+    uri: `http://localhost:3000/songs/${songId}/${userId}`,
+    json: true
+  };
   // send request to component
-  request_promise(`http://localhost:3000/songs/${songId}/${userId}`)
-    .then(responseString => {
-      res.writeHead(200);
-      res.end(responseString);
+  request_promise(options)
+    .then(response => {
+      //   res.writeHead(200);
+      res.end(JSON.stringify(response.rows[0]));
     })
     .catch(error => {
-      res.writeHead(500);
+      //   res.writeHead(500);
       res.end(error);
     });
 });
