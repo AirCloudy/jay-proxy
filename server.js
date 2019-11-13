@@ -25,7 +25,7 @@ app.get('/songs/:songId/:userId', (req, res) => {
       res.end(JSON.stringify(response.rows[0]));
     })
     .catch(error => {
-      res.end(error);
+      res.end(JSON.stringify(error));
     });
 });
 
