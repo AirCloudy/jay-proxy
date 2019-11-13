@@ -1,5 +1,7 @@
+require('newrelic');
+
 const express = require('express');
-const request_promise = require('request-promise');
+const requestPromise = require('request-promise');
 const path = require('path');
 
 const PORT = 4000;
@@ -18,13 +20,11 @@ app.get('/songs/:songId/:userId', (req, res) => {
     json: true
   };
   // send request to component
-  request_promise(options)
+  requestPromise(options)
     .then(response => {
-      //   res.writeHead(200);
       res.end(JSON.stringify(response.rows[0]));
     })
     .catch(error => {
-      //   res.writeHead(500);
       res.end(error);
     });
 });
