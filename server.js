@@ -16,7 +16,7 @@ app.use('/:songid', express.static(path.join(__dirname, './')));
 app.get('/songs/:songId/:userId', (req, res) => {
   const { songId, userId } = req.params;
   const options = {
-    uri: `http://localhost:3000/songs/${songId}/${userId}`,
+    uri: `http://52.53.67.203:3000/songs/${songId}/${userId}`,
     json: true
   };
   // send request to component
